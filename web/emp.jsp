@@ -4,6 +4,8 @@
 <%@ page import="java.util.logging.Logger" %>
 <%@ page import="checker.DigitChecker" %>
 <%@ page import="exception.IllegalParameter" %>
+<%@ page import="java.util.Collection" %>
+<%@ page import="entity.Person" %>
 <%--
   Created by IntelliJ IDEA.
   User: Fadeev
@@ -19,7 +21,7 @@
 <%
   HttpSession jspSession = request.getSession();
 
-  List<Employee> employees = (List<Employee>)jspSession.getAttribute("employees");
+  List<Person> employees = (List<Person>)jspSession.getAttribute("employees");
 
   if (employees == null) throw new IllegalParameter("Employee not found!");
 %>
@@ -52,7 +54,7 @@
   </script>
 </head>
 <form action="http://localhost:8081/web_war_exploded/emp" METHOD="GET">
-  <input type="text" name="value" value="<%=employees.get(0).getName()%>" onfocus=setValue() />
+  <input type="text" name="value" value="<%=employees.get(0).getEname()%>" onfocus=setValue() />
   <br>
   <br>
   <input type="submit" name="show" value="show"/>
@@ -84,8 +86,8 @@
 
     <tr>
       <td><input type="checkbox"/></td>
-      <td><a href=#><%=employees.get(i).getNumber()%></a></td>
-      <td><%=employees.get(i).getName()%></td>
+      <td><a href=#><%=employees.get(i).getEmpno()%></a></td>
+      <td><%=employees.get(i).getEname()%></td>
       <td><%=employees.get(i).getJob()%></td>
       <td><%=employees.get(i).getHiredate()%></td>
       <td><%=employees.get(i).getDeptno()%></td>

@@ -11,5 +11,10 @@
             <ejb-name>MathBean</ejb-name>
             <jndi-name>ejb/math</jndi-name>
         </ejb>
+
+        <ejb>
+            <ejb-name>PersonBean</ejb-name>
+            <jndi-name>ejb/person</jndi-name>
+        </ejb>
     </enterprise-beans>
 </sun-ejb-jar>

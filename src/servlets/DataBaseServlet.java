@@ -4,8 +4,11 @@ import beans.employee.EmpComp;
 import beans.employee.EmpHome;
 import checker.DigitChecker;
 import employee.Employee;
+import entity.Person;
+import entity.PersonHome;
 
 import javax.ejb.CreateException;
+import javax.ejb.FinderException;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.rmi.PortableRemoteObject;
@@ -15,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -38,36 +43,70 @@ public class DataBaseServlet extends HttpServlet {
             emp = empHome.create();
         } catch (NamingException e) {
             e.printStackTrace();
-        }  catch (CreateException e) {
+        } catch (CreateException e) {
             e.printStackTrace();
         }
 
-        List<Employee> employees = emp.getAllEmp();
+
+        Person person = null;
+        PersonHome personHome = null;
+        InitialContext initialContext = null;
+        try {
+            initialContext = new InitialContext();
+            personHome = (PersonHome) initialContext.lookup("ejb/person");
+            person = personHome.findByFirstName("1");
+            String name = person.getEname();
+        } catch (NamingException e) {
+            e.printStackTrace();
+        } catch (FinderException e) {
+            e.printStackTrace();
+        }
+
+
+        Collection<Person> employees = null;
+        try {
+            employees = personHome.findAll();
+        } catch (FinderException e) {
+            e.printStackTrace();
+        }
         String parameter = req.getParameter("value");
         String show = req.getParameter("show");
         String showAll = req.getParameter("showAll");
 
-
-        if (showAll != null &&  showAll.equals("show all")) {
-            employees = emp.getAllEmp();
+        if (showAll != null && showAll.equals("show all")) {
+            try {
+                employees = personHome.findAll();
+            } catch (FinderException e) {
+                e.printStackTrace();
+            }
         }
 
         if (show != null && show.equals("show")) {
             if (parameter != null) {
-                if (DigitChecker.isDigit(parameter)) employees = emp.searchEmpById(Integer.parseInt(parameter));
-                else employees = emp.searchEmpByName(parameter);
+                if (DigitChecker.isDigit(parameter)) try {
+                    person = personHome.findByPrimaryKey(Integer.parseInt(parameter));
+                    employees.clear();
+                    employees.add(person);
+                } catch (FinderException e) {
+                    e.printStackTrace();
+                }
+                else try {
+                    person = personHome.findByFirstName(parameter);
+                    employees.clear();
+                    employees.add(person);
+                } catch (FinderException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
-        session.setAttribute("employees", employees);
+        List<Person> persons = new ArrayList<>();
+        persons.addAll(employees);
+        session.setAttribute("employees", persons);
         session.setAttribute("par", parameter);
 
 
-
-
-
         req.getRequestDispatcher("emp.jsp").forward(req, resp);
-
 
 
     }
