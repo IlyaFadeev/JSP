@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="glassfish-api">
+    <CLASSES>
+      <root url="jar://C:/payara41/mq/lib/glassfish-api.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

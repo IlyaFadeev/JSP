@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ejb-jar PUBLIC '-//Sun Microsystems, Inc.//DTD Enterprise JavaBeans 2.0//EN' 'http://java.sun.com/dtd/ejb-jar_2_0.dtd'>
+<ejb-jar>
+    <enterprise-beans>
+        <session>
+            <ejb-name>EmpBean</ejb-name>
+            <home>beans.employee.EmpHome</home>
+            <remote>beans.employee.EmpComp</remote>
+            <ejb-class>beans.employee.EmpBean</ejb-class>
+            <session-type>Stateless</session-type>
+            <transaction-type>Container</transaction-type>
+        </session>
+
+        <session>
+            <ejb-name>MathBean</ejb-name>
+            <home>beans.employee.calc.CalcHome</home>
+            <remote>beans.employee.calc.CalcComp</remote>
+            <ejb-class>beans.employee.calc.MathBean</ejb-class>
+            <session-type>Stateful</session-type>
+            <transaction-type>Container</transaction-type>
+        </session>
+
+    </enterprise-beans>
+
+</ejb-jar>

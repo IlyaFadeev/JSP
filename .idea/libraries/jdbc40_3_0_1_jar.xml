@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jdbc40-3.0.1.jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jdbc40-3.0.1.jar.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,43 @@
+a:visited{
+	color:#ffd800;
+}
+
+a:hover{
+	color:#138808;
+}
+
+form{
+	margin:0;
+	padding:0;
+}
+
+table{
+
+	padding:0;
+}
+tr{
+	outline: thin solid black;
+	padding:0;
+	margin:0;
+}
+
+td{
+	outline: thin solid black;
+	width: 300px;
+	width:200px;
+	height:30px;
+	padding:0;
+	margin:0;
+}
+
+div{
+	position:absolute;
+	margin:10px 0 0 800px;
+	top:0%;
+}
+
+.employeeById{
+	position:absolute;
+	margin:500px 100px 0 800px;
+	top:50%;
+}
